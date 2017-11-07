@@ -1,4 +1,68 @@
 {% block content %}
-<header>ciao</header>
-
+<head>
+		<title>Controllo password</title>
+		<script>
+		var colore=new Array("yellow", "blue", "green", "red", "purple");
+		var somma = 0;
+		function metti_cursore()
+		{
+			// Mette il cursore nella casella con id="uno"
+			//document.getElementById("uno").focus();
+			// il metodo select() funziona:
+			//	esattamente come focus() se la casella è vuota 
+			//	altrimenti seleziona il contenuto
+			document.getElementById("uno").select();
+		}
+		function metticolore()
+		{	
+			document.bgColor=colore[somma];
+				somma++;
+				if(somma>5)
+				{
+				     somma=0;
+				}
+			window.setTimeout("metticolore();",2000);
+		}
+		function colore()
+		{
+			uno.style.backgroundColor="white";
+			due.style.backgroundColor="white";
+			document.getElementById("la_foto").src="";
+		}
+		function controllo()
+		{
+			var primo_addendo,secondo_addendo,risultato;
+			primo_addendo=document.getElementById("uno").value;
+			secondo_addendo=document.getElementById("due").value;
+			if(primo_addendo==""||secondo_addendo=="")
+				{
+				alert("Prego, inserisci una password nella prima casella e nella seconda casella!");
+				metti_cursore();
+				}
+			if(primo_addendo==secondo_addendo)
+				{
+				document.getElementById("la_foto").src="immagini/uguale.jpg";
+				due.style.backgroundColor="green";
+				}
+			else
+				{
+					document.getElementById("la_foto").src="immagini/diverso.jpg";
+					due.style.backgroundColor="red";
+					metti_cursore();
+				}
+		}
+		</script>
+	</head>
+	
+	<body bgcolor="yellow" onload="metticolore();" >
+		<input type="text" id="uno" onkeydown="colore();" style="font-size: 200%"  />
+		<input type="password" id="due" onkeydown="colore();" style="font-size: 200%" />
+		<p>
+			<input type="button" value="Controllo" onclick="controllo();"/>
+			&nbsp;&nbsp;
+			<img src="" id="la_foto";/>	
+		</p>
+		
+		
+	</body>
 {% endblock %}
